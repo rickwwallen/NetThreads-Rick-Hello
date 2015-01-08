@@ -81,36 +81,29 @@
    iface.ip[2] = 0;
    iface.ip[3] = 100;
 
-   iface2.mac[0] = 0xd4;
-   iface2.mac[1] = 0xbe;
-   iface2.mac[2] = 0xd9;
-   iface2.mac[3] = 0x97;
-   iface2.mac[4] = 0xe4;
-   iface2.mac[5] = 0x01;
-
-   iface2.ip[0] = 192;
-   iface2.ip[1] = 168;
-   iface2.ip[2] = 0;
-   iface2.ip[3] = 189;
-
-   //iface2.mac[0] = 0x70;
-   //iface2.mac[1] = 0x56;
-   //iface2.mac[2] = 0x81;
-   //iface2.mac[3] = 0xa9;
-   //iface2.mac[4] = 0x2c;
-   //iface2.mac[5] = 0x39;
-
-   //iface2.mac[0] = 0x01;
-   //iface2.mac[1] = 0xe4;
-   //iface2.mac[2] = 0x97;
-   //iface2.mac[3] = 0xd9;
-   //iface2.mac[4] = 0xbe;
-   //iface2.mac[5] = 0xd4;
+   //iface2.mac[0] = 0xd4;
+   //iface2.mac[1] = 0xbe;
+   //iface2.mac[2] = 0xd9;
+   //iface2.mac[3] = 0x97;
+   //iface2.mac[4] = 0xe4;
+   //iface2.mac[5] = 0x01;
 
    //iface2.ip[0] = 192;
    //iface2.ip[1] = 168;
    //iface2.ip[2] = 0;
-   //iface2.ip[3] = 185;
+   //iface2.ip[3] = 189;
+
+   iface2.mac[0] = 0x70;
+   iface2.mac[1] = 0x56;
+   iface2.mac[2] = 0x81;
+   iface2.mac[3] = 0xa9;
+   iface2.mac[4] = 0x2c;
+   iface2.mac[5] = 0x39;
+
+   iface2.ip[0] = 192;
+   iface2.ip[1] = 168;
+   iface2.ip[2] = 0;
+   iface2.ip[3] = 185;
 
    // allocate an output buffer
    t_addr *pkt = nf_pktout_alloc(PKT_SIZE);
