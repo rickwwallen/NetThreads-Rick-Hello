@@ -1,0 +1,27 @@
+# Ignore directories
+arch
+
+# Ignore archives
+*.tgz
+
+# Ignore swap files
+*.swp
+
+# Ignore object files
+*.o
+
+# Ignore netthreads generated files
+*.mif
+*.map
+*.static
+rick_hello
+
+# Ignore reference files
+dns_netfpga.h
+inet_pton.c
+shared_functions_netfpga.c
+shared_functions_netfpga.h
+structs_netfpga.h
+trie_loader.c
+triez_netfpga.c
+triez_netfpga.h

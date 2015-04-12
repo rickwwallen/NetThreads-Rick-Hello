@@ -1,3 +1,5 @@
+#include "dns_netfpga.h"
+#include "trie_loader.c"
 //#include <stdio.h>
 //#include <arpa/inet.h>
 //#include <support.h>
@@ -9,6 +11,9 @@
 
  #include "common.h"
  #include "dev.h"
+ //#include "memory.c"
+
+ //#define BASE_MASK 0x4000000
 
  const char* mystr = "Hello world this is a test pretty awesome. This means that I can send more than just 64 Bytes I LOVE THIS!!!!!!";
  //const char* mystr = "I LOVE THIS!!!!!!";
@@ -18,6 +23,7 @@
  struct netfpga_to_driver 
  {
   char str[STR_SIZE];
+  //u_int16_t a;
  };
  
  #define PKT_SIZE (sizeof(struct ioq_header) + sizeof(struct netfpga_to_driver))
@@ -28,7 +34,23 @@
   struct net_iface iface2;
   struct net_iface *ifc = &iface;
   struct net_iface *ifc2 = &iface2;
+  u_int16_t a = 1234;
+  char *key;
+  //u_int16_t b = ntohs(1234);
+  //u_int16_t *a = &b;
+  //u_int16_t *a;
+  //a =(u_int16_t *) malloc(sizeof(uint16_t));
+  //*a = 1234;
+  Trie *root;                     // Holds the start of the trie structure
+  sp_init_mem_single();
+  sp_init_mem_pool();
+  //root = createNode('*', NULL);
+  root = load_zone();
 
+  //key = (char *) BASE_MASK;
+  //memcpy(key, "asdf", 4);
+
+  //*key = "asdf";
    //int mytid = nf_tid();
    //
    //if(mytid != 0)
@@ -134,7 +156,14 @@
    memcpy(reth->ether_dhost, ifc2->mac, ETH_ALEN);
    memset(n2d->str, 0, STR_SIZE); 
    memcpy(n2d->str, mystr, strlen(mystr));
+   //memcpy(n2d->str, mystr, 4);
+   //memset(n2d->str, 0, sizeof(u_int16_t)); 
+   //memcpy(n2d->str, htons(a), sizeof(u_int16_t));
+   //n2d->str = a;
    n2d->str[strlen(mystr)+1] = nf_tid() + 0x30; //thread id in ascii
+   memcpy((void *) &n2d->str[strlen(mystr)+2], (void *)&a, sizeof(u_int16_t));
+   memcpy((void *) &n2d->str[strlen(mystr)+4], (void *)root, sizeof(Trie));
+   //memcpy((void *) &n2d->str[strlen(mystr)+4], mystr, strlen(mystr));
    //n2d->str[strlen(mystr)+1] = mytid + 0x30; //thread id in ascii
 
    // send it
